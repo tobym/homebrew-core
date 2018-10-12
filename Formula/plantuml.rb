@@ -22,7 +22,7 @@ class Plantuml < Formula
     libexec.install "plantuml.#{version}.jar" => jar
     (bin/"plantuml").write <<~EOS
       #!/bin/bash
-      GRAPHVIZ_DOT="#{Formula["graphviz"].opt_bin}/dot" exec java -jar #{libexec}/#{jar} "$@"
+      GRAPHVIZ_DOT="#{Formula["graphviz"].opt_bin}/dot" exec java -Djava.awt.headless=true -jar #{libexec}/#{jar} "$@"
     EOS
     chmod 0555, bin/"plantuml"
     libexec.install resource("batik-and-fop") if build.with? "pdf-support"
